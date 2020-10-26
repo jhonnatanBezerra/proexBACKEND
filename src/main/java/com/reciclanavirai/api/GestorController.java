@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.reciclanavirai.domain.Gestor;
 import com.reciclanavirai.domain.dto.GestorDTO;
+import com.reciclanavirai.exception.ErroAutenticacaoException;
 import com.reciclanavirai.service.GestorService;
 
 @RestController
@@ -38,6 +39,16 @@ public class GestorController {
 			return ResponseEntity.badRequest().body("O gestor para o ID informado não foi localizado");
 		}else {
 			return ResponseEntity.ok(g);
+		}
+	}
+	
+	@PostMapping("/autenticar")
+	public ResponseEntity autenticar(@RequestBody Gestor g) {
+		try {
+			GestorDTO gestorAutenticado = service.autenticar(g.getEmail(), g.getSenha());
+			return ResponseEntity.ok(gestorAutenticado);
+		}catch(ErroAutenticacaoException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
 	

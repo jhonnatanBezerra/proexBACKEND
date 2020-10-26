@@ -14,4 +14,7 @@ public interface GestorService {
 	List<GestorDTO> listarGestores();
 	Optional<GestorDTO> listarGestoresPorId(Long id);
 	
+	GestorDTO autenticar (String email, String senha);
+	void validarEmail(String email);
+	
 }

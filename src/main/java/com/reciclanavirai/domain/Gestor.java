@@ -16,6 +16,7 @@ public class Gestor {
 	private Long id;
 	private String nome;
 	private String email;
+	private String senha;
 	private String cargo;
 	@ManyToOne
 	@JoinColumn(name = "fk_departamento_id")

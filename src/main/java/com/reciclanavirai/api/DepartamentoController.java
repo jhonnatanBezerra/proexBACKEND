@@ -20,7 +20,7 @@ import com.reciclanavirai.domain.dto.DepartamentoDTO;
 import com.reciclanavirai.service.DepartamentoService;
 
 @RestController
-@RequestMapping("api/agendamentos")
+@RequestMapping("api/departamentos")
 public class DepartamentoController {
 
 	@Autowired
