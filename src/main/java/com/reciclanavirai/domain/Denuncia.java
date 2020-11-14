@@ -1,5 +1,7 @@
 package com.reciclanavirai.domain;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,16 +13,15 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Gestor {
-	
+public class Denuncia {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nome;
-	private String email;
-	private String senha;
-	private String cargo;
+	private String denuncia;
+	private String foto;
+	private Date data;
 	
 	@ManyToOne
-	@JoinColumn(name = "fk_departamento_id")
-	private Departamento departamento;
+	@JoinColumn(name = "fk_bairro_id")
+	private Bairro bairro;
+	
 }

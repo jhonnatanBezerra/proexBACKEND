@@ -25,8 +25,14 @@ public class Agendamento {
 	@Enumerated(value = EnumType.STRING)
 	private DiaSemana diaSemana;
 	@Enumerated(value = EnumType.STRING)
-	private TipoColeta tipoColeta;	
+	private TipoColeta tipoColeta;
+	
 	@ManyToOne
 	@JoinColumn(name = "fk_bairro_id")
 	private Bairro bairro;
+	
+	@ManyToOne
+	@JoinColumn(name = "fk_gestor_id")
+	private Gestor gestor;
+	
 }

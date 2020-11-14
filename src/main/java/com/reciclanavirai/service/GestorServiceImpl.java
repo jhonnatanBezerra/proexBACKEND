@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +17,20 @@ import com.reciclanavirai.repository.GestorRepository;
 @Service @Transactional(readOnly = false)
 public class GestorServiceImpl implements GestorService{
 
+	@Autowired
 	GestorRepository repository;
+	
+	@Override
+	public GestorDTO autenticar(String email, String senha) {
+		Optional<Gestor> gestor = repository.findByEmail(email);
+		if(!gestor.isPresent()) {
+			throw new ErroAutenticacaoException("E-mail de gestor não encontrado");
+		}
+		if(!gestor.get().getSenha().equals(senha)){
+			throw new ErroAutenticacaoException("Senha invalida");
+		}
+		return GestorDTO.create(gestor.get());
+	}
 	
 	@Override
 	public GestorDTO salvar(Gestor g) {
@@ -47,17 +61,7 @@ public class GestorServiceImpl implements GestorService{
 		return repository.findById(id).map(GestorDTO::create);
 	}
 
-	@Override
-	public GestorDTO autenticar(String email, String senha) {
-		Optional<Gestor> gestor = repository.findByEmail(email);
-		if(!gestor.isPresent()) {
-			throw new ErroAutenticacaoException("E-mail de gestor não encontrado");
-		}
-		if(!gestor.get().getSenha().equals(senha)){
-			throw new ErroAutenticacaoException("Senha invalida");
-		}
-		return GestorDTO.create(gestor.get());
-	}
+	
 
 	@Override
 	public void validarEmail(String email) {

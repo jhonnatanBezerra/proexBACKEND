@@ -1,6 +1,7 @@
 package com.reciclanavirai.api;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -64,5 +65,10 @@ public class AgendamentoController {
 	@GetMapping("/{idBairro}")
 	public ResponseEntity<List<AgendamentoDTO>> listarAgendamentosPorBairro(@PathVariable("idBairro") Long idBairro){
 		return ResponseEntity.ok(service.listarAgendamentosPorBairro(idBairro));
+	}
+	
+	@GetMapping("/{idAgendamento}")
+	public ResponseEntity<Optional<AgendamentoDTO>> listarAgendamentoPorId(@PathVariable("idAgendamento") Long idAgendamento){
+		return ResponseEntity.ok(service.listarAgendamentoPorId(idAgendamento));
 	}
 }

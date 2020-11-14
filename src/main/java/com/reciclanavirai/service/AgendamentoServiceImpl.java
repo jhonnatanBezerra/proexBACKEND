@@ -65,6 +65,7 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Optional<AgendamentoDTO> listarAgendamentoPorId(Long id) {		
 		return agendamentoRepository.findById(id).map(AgendamentoDTO::create);
 	}
